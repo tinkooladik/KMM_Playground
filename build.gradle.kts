@@ -6,6 +6,13 @@ plugins {
     kotlin("multiplatform").version("1.7.20").apply(false)
 }
 
+buildscript {
+    val sqlDelightVersion = "1.5.4"
+    dependencies {
+        classpath("com.squareup.sqldelight:gradle-plugin:$sqlDelightVersion")
+    }
+}
+
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }

@@ -1,5 +1,6 @@
 package com.tinkooladik.kmmplayground
 
+import com.tinkooladik.kmmplayground.entity.RocketLaunch
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.plugins.contentnegotiation.*
