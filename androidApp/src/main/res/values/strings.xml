@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- navigation -->
     <string name="drawer_home">Home</string>
     <string name="drawer_launches">Launches</string>
+
+    <!-- error -->
+    <string name="error_no_connection">No Internet connection</string>
+    <string name="error_unknown">Oops! Something went wrong…</string>
+
+    <!-- empty result -->
+    <string name="default_greeting">Hi there!</string>
+
+    <!-- other -->
+    <string name="loading">Loading…</string>
 </resources>
