@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tinkooladik.kmmplayground.android.R
 import com.tinkooladik.kmmplayground.android.ui.AppTopBar
+import com.tinkooladik.kmmplayground.android.ui.common.Async
 import com.tinkooladik.kmmplayground.android.ui.common.UniversalAsync
 import com.tinkooladik.kmmplayground.android.ui.theme.PlaygroundTheme
 import com.tinkooladik.kmmplayground.entity.Links
@@ -92,6 +93,23 @@ fun LaunchCard(
     }
 }
 
+private val previewLaunch = RocketLaunch(
+    flightNumber = 0,
+    missionName = "Mission Name",
+    launchYear = 2023,
+    launchDateUTC = "",
+    rocket = Rocket(
+        id = "id",
+        name = "Rocket Name",
+        type = "Rocket Type"
+    ),
+    details = "Details",
+    launchSuccess = true,
+    links = Links(
+        missionPatchUrl = null,
+        articleUrl = null
+    )
+)
 
 @Preview("Launch card")
 @Preview("Launch card (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
@@ -121,20 +139,18 @@ fun LaunchListPreview() {
     }
 }
 
-private val previewLaunch = RocketLaunch(
-    flightNumber = 0,
-    missionName = "Mission Name",
-    launchYear = 2023,
-    launchDateUTC = "",
-    rocket = Rocket(
-        id = "id",
-        name = "Rocket Name",
-        type = "Rocket Type"
-    ),
-    details = "Details",
-    launchSuccess = true,
-    links = Links(
-        missionPatchUrl = null,
-        articleUrl = null
-    )
-)
+@Preview("LaunchesScreen")
+@Preview("LaunchesScreen (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun HomeScreenPreview() {
+    PlaygroundTheme {
+        Surface {
+            LaunchesScreen(
+                LaunchesUiState(
+                    Async.Success(listOf(previewLaunch, previewLaunch, previewLaunch))
+                ),
+                {}
+            )
+        }
+    }
+}
