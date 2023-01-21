@@ -14,10 +14,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.style.TextAlign
 import com.tinkooladik.kmmplayground.android.R
 import com.tinkooladik.kmmplayground.android.ui.AppTopBar
-import com.tinkooladik.kmmplayground.android.ui.common.Async
-import com.tinkooladik.kmmplayground.android.ui.common.EmptyResult
-import com.tinkooladik.kmmplayground.android.ui.common.ErrorView
-import com.tinkooladik.kmmplayground.android.ui.common.LoadingView
+import com.tinkooladik.kmmplayground.android.ui.common.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -42,25 +39,17 @@ fun HomeScreen(
             .nestedScroll(scrollBehavior.nestedScrollConnection)
             .fillMaxSize()
 
-        with(uiState.greeting) {
-            when (this) {
-                is Async.Success -> {
-                    Greeting(
-                        greeting = value,
-                        modifier = contentModifier
-                    )
-                }
-                Async.EmptyData -> EmptyResult(
-                    textResId = R.string.default_greeting,
+        UniversalAsync(
+            async = uiState.greeting,
+            onSuccess = { greeting ->
+                Greeting(
+                    greeting = greeting,
                     modifier = contentModifier
                 )
-                is Async.Fail -> ErrorView(
-                    error = error,
-                    modifier = contentModifier
-                )
-                Async.Loading -> LoadingView(modifier = contentModifier)
-            }
-        }
+            },
+            modifier = contentModifier,
+            emptyResId = R.string.default_greeting
+        )
     }
 }
 

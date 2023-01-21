@@ -10,6 +10,7 @@
 
     <!-- empty result -->
     <string name="default_greeting">Hi there!</string>
+    <string name="empty_launches">There were no rockets launched yet :(</string>
 
     <!-- other -->
     <string name="loading">Loading…</string>

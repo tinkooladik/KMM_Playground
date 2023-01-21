@@ -65,3 +65,28 @@ fun LoadingView(modifier: Modifier) {
         )
     }
 }
+
+@Composable
+fun <V> UniversalAsync(
+    async: Async<V>,
+    onSuccess: @Composable (V) -> Unit,
+    modifier: Modifier = Modifier,
+    emptyResId: Int = 0
+) {
+    with(async) {
+        when (this) {
+            is Async.Success -> {
+                onSuccess(value)
+            }
+            Async.EmptyData -> EmptyResult(
+                textResId = emptyResId,
+                modifier = modifier
+            )
+            is Async.Fail -> ErrorView(
+                error = error,
+                modifier = modifier
+            )
+            Async.Loading -> LoadingView(modifier = modifier)
+        }
+    }
+}

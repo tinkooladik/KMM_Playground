@@ -33,7 +33,7 @@ fun PlaygroundNavGraph(
         }
         composable(PlaygroundDestinations.LAUNCHES_ROUTE) {
             LaunchesRoute(
-                LaunchesViewModel(),
+                LaunchesViewModel(diContainer.repository),
                 openDrawer
             )
         }
