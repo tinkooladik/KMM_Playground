@@ -7,8 +7,8 @@ import androidx.navigation.NavOptionsBuilder
 sealed class AppDestination(val route: String) {
     object Home : AppDestination("home")
     object Launches : AppDestination("launches")
-    object LaunchDetails : AppDestination("launchDetails/{flightNumber}") {
-        fun createRoute(flightNumber: Int): String = "launchDetails/$flightNumber"
+    object LaunchDetails : AppDestination("launch/{flightNumber}/details") {
+        fun createRoute(flightNumber: Int): String = "launch/$flightNumber/details"
     }
 }
 

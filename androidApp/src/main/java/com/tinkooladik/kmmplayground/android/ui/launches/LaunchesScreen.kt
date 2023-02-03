@@ -108,17 +108,7 @@ fun LaunchCard(
                     fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.titleLarge
                 )
-                Image(
-                    painter = painterResource(
-                        id = if (launch.launchSuccess == true) {
-                            R.drawable.ic_launch_success
-                        } else {
-                            R.drawable.ic_launch_fail
-                        }
-                    ),
-                    contentDescription = null,
-                    modifier = Modifier
-                )
+                LaunchStatus(launch = launch)
             }
             Text(
                 text = "${launch.rocket.name}, ${launch.rocket.type} - ${launch.launchYear}",
@@ -135,6 +125,24 @@ fun LaunchCard(
             )
         }
     }
+}
+
+@Composable
+fun LaunchStatus(
+    launch: RocketLaunch,
+    modifier: Modifier = Modifier
+) {
+    Image(
+        painter = painterResource(
+            id = if (launch.launchSuccess == true) {
+                R.drawable.ic_launch_success
+            } else {
+                R.drawable.ic_launch_fail
+            }
+        ),
+        contentDescription = null,
+        modifier = modifier
+    )
 }
 
 @Preview("Launch card")
