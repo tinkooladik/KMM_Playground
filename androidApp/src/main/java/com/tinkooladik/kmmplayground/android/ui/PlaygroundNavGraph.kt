@@ -11,30 +11,42 @@ import com.tinkooladik.kmmplayground.android.ui.home.HomeRoute
 import com.tinkooladik.kmmplayground.android.ui.home.HomeViewModel
 import com.tinkooladik.kmmplayground.android.ui.launches.LaunchesRoute
 import com.tinkooladik.kmmplayground.android.ui.launches.LaunchesViewModel
+import com.tinkooladik.kmmplayground.android.ui.launches.details.LaunchDetailsRoute
+import com.tinkooladik.kmmplayground.android.ui.launches.details.LaunchDetailsViewModel
 
 @Composable
 fun PlaygroundNavGraph(
     diContainer: DiContainer,
     modifier: Modifier = Modifier,
     openDrawer: () -> Unit = {},
+    onLaunchSelected: (Int) -> Unit = {},
     navController: NavHostController = rememberNavController(),
-    startDestination: String = PlaygroundDestinations.HOME_ROUTE
+    startDestination: String = AppDestination.Home.route
 ) {
     NavHost(
         navController = navController,
         startDestination = startDestination,
         modifier = modifier
     ) {
-        composable(PlaygroundDestinations.HOME_ROUTE) {
+        composable(AppDestination.Home.route) {
             HomeRoute(
-                HomeViewModel(diContainer.greetingService),
-                openDrawer
+                viewModel = HomeViewModel(diContainer.greetingService),
+                openDrawer = openDrawer
             )
         }
-        composable(PlaygroundDestinations.LAUNCHES_ROUTE) {
+        composable(AppDestination.Launches.route) {
             LaunchesRoute(
-                LaunchesViewModel(diContainer.repository),
-                openDrawer
+                viewModel = LaunchesViewModel(diContainer.repository),
+                openDrawer = openDrawer,
+                navigateToDetails = onLaunchSelected
+            )
+        }
+        composable(AppDestination.LaunchDetails.route) { navBackStackEntry ->
+            val flightNumber = navBackStackEntry.arguments?.getString("flightNumber")?.toIntOrNull()
+            requireNotNull(flightNumber) { "Flight number is required" }
+            LaunchDetailsRoute(
+                viewModel = LaunchDetailsViewModel(diContainer.repository, flightNumber),
+                onBackPressed = { navController.popBackStack(AppDestination.Launches.route, false) }
             )
         }
     }

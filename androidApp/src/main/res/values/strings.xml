@@ -3,6 +3,7 @@
     <!-- navigation -->
     <string name="drawer_home">Home</string>
     <string name="drawer_launches">Launches</string>
+    <string name="launch_details">Launch details</string>
 
     <!-- error -->
     <string name="error_no_connection">No Internet connection</string>
@@ -11,6 +12,7 @@
     <!-- empty result -->
     <string name="default_greeting">Hi there!</string>
     <string name="empty_launches">There were no rockets launched yet :(</string>
+    <string name="empty_details">No details provided for this launch.</string>
 
     <!-- other -->
     <string name="loading">Loading…</string>

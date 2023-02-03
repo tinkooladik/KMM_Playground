@@ -7,8 +7,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun LaunchesRoute(
     viewModel: LaunchesViewModel,
-    openDrawer: () -> Unit
+    openDrawer: () -> Unit,
+    navigateToDetails: (Int) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    LaunchesScreen(uiState = uiState, openDrawer = openDrawer)
+    LaunchesScreen(
+        uiState = uiState,
+        openDrawer = openDrawer,
+        navigateToDetails = navigateToDetails
+    )
 }

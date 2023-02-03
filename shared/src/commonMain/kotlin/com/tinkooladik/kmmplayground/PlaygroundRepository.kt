@@ -23,4 +23,9 @@ class PlaygroundRepository(databaseDriverFactory: DatabaseDriverFactory) {
             }
         }
     }
+
+    @Throws(Exception::class)
+    fun getLaunch(flightNumber: Int): RocketLaunch {
+        return database.getLaunch(flightNumber)
+    }
 }

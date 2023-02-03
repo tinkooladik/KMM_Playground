@@ -28,8 +28,7 @@ fun PlaygroundApp(
         val coroutineScope = rememberCoroutineScope()
 
         val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentRoute =
-            navBackStackEntry?.destination?.route ?: PlaygroundDestinations.HOME_ROUTE
+        val currentRoute = navBackStackEntry?.destination?.route ?: AppDestination.Home.route
 
         val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
@@ -48,7 +47,8 @@ fun PlaygroundApp(
             PlaygroundNavGraph(
                 diContainer = diContainer,
                 navController = navController,
-                openDrawer = { coroutineScope.launch { drawerState.open() } }
+                openDrawer = { coroutineScope.launch { drawerState.open() } },
+                onLaunchSelected = navActions.navigateToLaunchDetails
             )
         }
     }

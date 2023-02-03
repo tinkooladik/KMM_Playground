@@ -15,6 +15,11 @@ internal class Database(databaseDriverFactory: DatabaseDriverFactory) {
         return dbQuery.selectAllLaunchesInfo(::mapLaunchSelecting).executeAsList()
     }
 
+    internal fun getLaunch(flightNumber: Int): RocketLaunch {
+        return getAllLaunches().find { it.flightNumber == flightNumber }
+            ?: throw Exception("Launch not found")
+    }
+
     internal fun createLaunches(launches: List<RocketLaunch>) {
         dbQuery.transaction {
             launches.forEach { launch ->
